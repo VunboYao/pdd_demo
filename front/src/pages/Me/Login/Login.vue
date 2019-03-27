@@ -182,7 +182,6 @@
           }
           // 5.3 手机验证码登陆
           const result = await phoneCodeLogin(this.phone, this.code)
-          console.log(result)
           if (result.success_code === 200) {
             this.userInfo = result.message
           } else {

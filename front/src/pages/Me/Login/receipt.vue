@@ -17,13 +17,21 @@
           <div class="c-img">
             <img src="./images/avatar.jpg" alt="">
           </div>
-          <div class="c-details">
+          <div class="c-details" v-show="isShow">
             <h3>地下城与勇士</h3>
             <h4>广州一区</h4>
             <h5>￥88</h5>
+            <!--<button>查看账号</button>-->
+            <div class="confirm">
+              <span @click="isShow=!isShow">查看账户</span>
+              <span @click="popConfirm">确认收货</span></div>
+          </div>
+          <div class="c-details" v-show="!isShow">
+            <span class="account">账户:5151315</span>
+            <span class="password">密码:151513</span>
+            <div class="confirm" @click="isShow=!isShow"><span>查看大区</span></div>
           </div>
         </div>
-        <div class="confirm" @click="popConfirm"><span>确认收货</span></div>
       </div>
     </div>
   </div>
@@ -35,7 +43,8 @@
     name: "receipt",
     data() {
       return {
-        demo: 'Receipt'
+        demo: 'Receipt',
+        isShow: true
       }
     },
     methods: {
@@ -97,7 +106,14 @@
         padding-left 3%
         width:65%
         height:100%
-        h3
+        .account,.password
+          display: block
+          width 100%
+          line-height: 30px;
+          color #8a0000
+        button
+          border: none
+
           font-size: 22px
           height: 35px
           width 100%

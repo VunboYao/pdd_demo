@@ -12,5 +12,7 @@ export default {
   // 用户数据
   userInfo: [],
   // 购物车数据
-  carGoods: []
+  carGoods: [],
+  // 新发布数据
+  newPublishData: []
 }

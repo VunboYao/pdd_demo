@@ -214,6 +214,7 @@ router.post('/api/login_code', (req, res) => {
                 const addSql = "INSERT INTO pdd_user_info(user_name, user_phone) values(?,?)"
                 const addSqlParams = [phone, phone]
                 conn.query(addSql, addSqlParams, (error, results, fiels) => {
+                    console.log(results);
                     results = JSON.parse(JSON.stringify(results))
                     if (!error) {
                         req.session.userId = results.insertId

@@ -12,26 +12,30 @@
         <span>查看全部 > </span>
       </router-link>
       <div class="older-bottom">
-        <div class="bottom-item">
+        <router-link tag="div" to="/allGoods" class="bottom-item">
           <i class="itlike-1"></i>
-          <span>待付款</span>
-        </div>
+          <span>全部订单</span>
+        </router-link>
         <router-link class="bottom-item" tag="div" to="/receipt">
           <i class="itlike-2"></i>
           <span>待收货</span>
+        </router-link>
+        <router-link tag="div" class="bottom-item" to="/setting">
+          <i class="itlike-4"></i>
+          <span>设置</span>
         </router-link>
         <!--<div class="bottom-item">-->
           <!--<i class="itlike-3"></i>-->
           <!--<span>待发货</span>-->
         <!--</div>-->
-        <div class="bottom-item">
-          <i class="itlike-4"></i>
-          <span>待分享</span>
-        </div>
-        <div class="bottom-item">
-          <i class="itlike-5"></i>
-          <span>待评价</span>
-        </div>
+        <!--<div class="bottom-item">-->
+          <!--<i class="itlike-4"></i>-->
+          <!--<span>待分享</span>-->
+        <!--</div>-->
+        <!--<div class="bottom-item">-->
+          <!--<i class="itlike-5"></i>-->
+          <!--<span>待评价</span>-->
+        <!--</div>-->
       </div>
     </div>
     <div class="setting">
@@ -67,10 +71,10 @@
         <i class="itlike-3"></i>
         <span>官方客服</span>
       </div>-->
-      <router-link tag="div" class="setting-item" to="/setting">
-        <i class="itlike-4"></i>
-        <span>设置</span>
-      </router-link>
+      <!--<router-link tag="div" class="setting-item" to="/setting">-->
+        <!--<i class="itlike-4"></i>-->
+        <!--<span>设置</span>-->
+      <!--</router-link>-->
     </div>
     <!-- 新增买卖接口 -->
     <router-link tag="div" to="/">

@@ -26,7 +26,8 @@ import {
   SINGLE_SELECTED,
   DEL_GOODS,
   ADD_CART,
-  DEL_GOODS_GROUP
+  DEL_GOODS_GROUP,
+  PUBLISH_NEW_DATA
 } from './mutation-types'
 
 export default {
@@ -120,5 +121,10 @@ export default {
   // 15.购物车多个删除
   delGoodsGroup({commit}, {goodsGroup}) {
     commit(DEL_GOODS_GROUP,{goodsGroup})
+  },
+
+  // 16.发布新数据
+  publishNewData({commit}, {list}) {
+    commit(PUBLISH_NEW_DATA, {list})
   }
 }

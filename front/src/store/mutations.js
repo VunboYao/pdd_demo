@@ -14,7 +14,8 @@ import {
   SINGLE_SELECTED,
   DEL_GOODS,
   ADD_CART,
-  DEL_GOODS_GROUP
+  DEL_GOODS_GROUP,
+  PUBLISH_NEW_DATA
 } from './mutation-types'
 
 export default {
@@ -105,6 +106,11 @@ export default {
       const index = state.carGoods.indexOf(item)
       state.carGoods.splice(index, 1)
     })
+  },
+
+  // 发布新商品
+  [PUBLISH_NEW_DATA](state, {list}) {
+      state.newPublishData.push(list);
   }
 
   // // 加入购物车

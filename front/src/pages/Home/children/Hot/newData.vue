@@ -8,48 +8,12 @@
           <span>价格</span>
           <span>操作</span>
         </div>
-        <div class="c-list">
-          <div class="item">
-            <span class="i-name">地下城与勇士</span>
-            <span class="i-area">广州一区</span>
-            <span class="i-price">￥88</span>
-            <span class="i-operate">我要买</span>
-          </div>
-          <div class="item">
-            <span class="i-name">地下城与勇士</span>
-            <span class="i-area">广州一区</span>
-            <span class="i-price">￥88</span>
-            <span class="i-operate">我要买</span>
-          </div>
-          <div class="item">
-            <span class="i-name">地下城与勇士</span>
-            <span class="i-area">广州一区</span>
-            <span class="i-price">￥88</span>
-            <span class="i-operate">我要买</span>
-          </div>
-          <div class="item">
-            <span class="i-name">地下城与勇士</span>
-            <span class="i-area">广州一区</span>
-            <span class="i-price">￥88</span>
-            <span class="i-operate">我要买</span>
-          </div>
-          <div class="item">
-            <span class="i-name">地下城与勇士</span>
-            <span class="i-area">广州一区</span>
-            <span class="i-price">￥88</span>
-            <span class="i-operate">我要买</span>
-          </div>
-          <div class="item">
-            <span class="i-name">地下城与勇士</span>
-            <span class="i-area">广州一区</span>
-            <span class="i-price">￥88</span>
-            <span class="i-operate">我要买</span>
-          </div>
-          <div class="item">
-            <span class="i-name">地下城与勇士</span>
-            <span class="i-area">广州一区</span>
-            <span class="i-price">￥88</span>
-            <span class="i-operate">我要买</span>
+        <div class="c-list" v-if="newPublishData.length > 0">
+          <div class="item" v-for="(item,index) in newPublishData" :key="index">
+            <span class="i-name">{{item.gameName}}</span>
+            <span class="i-area">{{item.areaName}}</span>
+            <span class="i-price">￥{{item.price}}</span>
+            <span class="i-operate" @click="addShoppingCar(item)">我要买</span>
           </div>
         </div>
       </div>
@@ -57,8 +21,17 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     export default {
-        name: "newData"
+        name: "newData",
+      computed: {
+          ...mapState(['newPublishData'])
+      },
+      methods: {
+        addShoppingCar(goods) {
+          console.log(goods);
+        }
+      }
     }
 </script>
 

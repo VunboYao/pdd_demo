@@ -8,14 +8,17 @@
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
     <div class="content">
-      <mt-field label="游戏名" placeholder="请输入游戏名称"></mt-field>
-      <mt-field label="大区名称" placeholder="请输入大区名称"></mt-field>
-      <mt-field label="价格" type="number" placeholder="请输入您出售的价格"></mt-field>
+      <mt-field label="游戏名" placeholder="请输入游戏名称" v-model="gameName"></mt-field>
+      <mt-field label="大区名称" placeholder="请输入大区名称" v-model="areaName"></mt-field>
+      <mt-field label="游戏账号" placeholder="请输入账号"
+                v-model="account"></mt-field>
+      <mt-field label="游戏密码" placeholder="请输入账号密码" v-model="password"></mt-field>
+      <mt-field label="价格" v-model="price" type="number" placeholder="请输入您出售的价格"></mt-field>
       <div class="btn-options">
         <router-link to="/">
           <mt-button class="btn-cancel" type="danger">取 消</mt-button>
         </router-link>
-        <mt-button type="primary">出 售</mt-button>
+        <mt-button type="primary" @click.stop="publishAccount">出 售</mt-button>
       </div>
       <p class="info-tip-title">安全提示</p>
       <p class="info-tips">
@@ -29,13 +32,41 @@
 </template>
 
 <script>
+  import {Indicator,MessageBox } from 'mint-ui';
   export default {
     data() {
       return {
-        title: 'ssss'
+        gameName: '',
+        areaName: '',
+        password: '',
+        account: '',
+        price: ''
       }
     },
-    name: "sellAnything"
+    name: "sellAnything",
+    methods: {
+      async publishAccount() {
+        // 非空验证
+        if (this.price === '' || this.gameName === '' || this.account === '' || this.areaName === '' || this.password === '') {
+          MessageBox('警告', '发布内容不能为空');
+          return false;
+        }
+        let list =  {
+          gameName: this.gameName,
+          areaName: this.areaName,
+          account: this.account,
+          password: this.password,
+          price: this.price
+        }
+        this.$store.dispatch('publishNewData',{list});
+        Indicator.open('发布成功!');
+        let that = this;
+        setTimeout(function () {
+          Indicator.close();
+          that.$router.push("/home");
+        },1000)
+      }
+    }
   }
 </script>
 
@@ -43,6 +74,7 @@
   .main {
     overflow-y: hidden;
   }
+
   .content {
     margin-top: 50px;
   }
@@ -53,14 +85,17 @@
     align-items: center;
     height: 160px;
   }
+
   .btn-cancel {
     margin-right: 20px;
   }
+
   .info-tip-title {
     text-align: center;
     line-height: 2;
   }
-  .info-tips{
+
+  .info-tips {
     padding: 0 10px;
     text-align: justify;
     font-size: 14px;

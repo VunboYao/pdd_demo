@@ -13,3 +13,4 @@ export const SINGLE_SELECTED = 'single_selected' // 单个商品的选中
 export const DEL_GOODS = 'del_goods' // 删除单个商品
 export const ADD_CART = 'add_cart' // 加入购物车
 export const DEL_GOODS_GROUP = 'del_goods_group' // 删除多个商品
+export const PUBLISH_NEW_DATA = 'publish_new_data' // 发布新账号
