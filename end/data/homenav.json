@@ -1,0 +1,20 @@
+{
+  "data": [
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon01.jpg", "icontitle": "热血传奇"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon02.jpg", "icontitle": "QQ飞车"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon03.jpg", "icontitle": "时空猎人"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon04.jpg", "icontitle": "梦幻西游"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon05.jpg", "icontitle": "穿越火线"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon06.jpg", "icontitle": "王者荣耀"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon07.jpg", "icontitle": "阴阳师"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon08.jpg", "icontitle": "传奇手游"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon09.jpg", "icontitle": "命运指定"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon10.jpg", "icontitle": "幸运女神"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon11.jpg", "icontitle": "格斗天王"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon12.jpg", "icontitle": "三军无敌"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon13.jpg", "icontitle": "1分抽大奖"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon14.jpg", "icontitle": "战争凯影"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon15.jpg", "icontitle": "海淘"},
+    {"iconurl": "http://127.0.0.1:3000/images/home/nav_icon16.jpg", "icontitle": "传奇乐透"}
+  ]
+}
