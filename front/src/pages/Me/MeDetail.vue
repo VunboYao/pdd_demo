@@ -99,7 +99,7 @@
       async saveUserInfo() {
         // 请求接口
         let result = await changeUserInfo(this.userInfo.id, this.user_name, this.user_sex, this.user_address, this.user_birthday, this.user_phone, this.user_sign)
-        // console.log(result)
+        console.log(result)
         Toast({message: result.message,position: 'bottom',duration: 2000});
         if (result.success_code === 200) {
           // 更新本地数据

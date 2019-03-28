@@ -155,14 +155,16 @@ router.post('/api/change_user_msg', (req, res) => {
     const user_phone = req.body.user_phone || '';
     const user_birthday = req.body.user_birthday || '';
     const user_sign = req.body.user_sign || '';
+    console.log(id);
     // 2.Authentication
     if (!id) {
         res.json({err_code: 0, message: '修改用户信息失败'})
     } else {
         // 3. update 更新数据
-        let sqlStr = "UPDATE pdd_user_info SET user_name=?, user_sex=?,user_address=?,user_birthday=?,user_phone=?,user_sign=? WHERE id =" + id;
+        let sqlStr = "UPDATE pdd_user_info SET user_name=?, user_sex=?, user_address=?,user_birthday=?,user_phone=?,user_sign=? WHERE id =" + id;
         let strParams = [user_name, user_sex, user_address, user_birthday, user_phone, user_sign];
         conn.query(sqlStr, strParams, (error, results, fields) => {
+            console.log(results);
             if (error) {
                 res.json({err_code: 0, message: '修改用户信息失败'})
             } else {
@@ -211,7 +213,7 @@ router.post('/api/login_code', (req, res) => {
                     message: results[0]
                 })
             } else { // 新用户
-                const addSql = "INSERT INTO pdd_user_info(user_name, user_phone) values(?,?)"
+                const addSql = "INSERT INTO pdd_user_info(user_name, user_phone) values (?,?)"
                 const addSqlParams = [phone, phone]
                 conn.query(addSql, addSqlParams, (error, results, fiels) => {
                     console.log(results);
