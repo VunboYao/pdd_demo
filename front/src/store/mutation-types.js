@@ -14,3 +14,7 @@ export const DEL_GOODS = 'del_goods' // 删除单个商品
 export const ADD_CART = 'add_cart' // 加入购物车
 export const DEL_GOODS_GROUP = 'del_goods_group' // 删除多个商品
 export const PUBLISH_NEW_DATA = 'publish_new_data' // 发布新账号
+export const ADD_ACCOUNT_TO_CAR = 'add_account_to_car' // 添加账号到购物车
+export const ADD_UNRECEIVED = 'add_unreceived' // 添加数据到未收获列表
+export const CONFIRM_RECEIVED = 'confirm_received' // 确认收货
+export const ALL_ORDER = 'all_order' // 添加所有订单

@@ -13,24 +13,24 @@
           <span class="title-uni">MGT商城</span>
           <span class="title-uni-desc">待收货</span>
         </div>
-        <div class="content">
+        <div class="content" v-for="(item,index) in unreceived" :key="index">
           <div class="c-img">
-            <img src="./images/avatar.jpg" alt="">
+            <img src="./images/img.jpg" alt="">
           </div>
           <div class="c-details" v-show="isShow">
-            <h3>地下城与勇士</h3>
-            <h4>广州一区</h4>
-            <h5>￥88</h5>
+            <h3>{{item.goods_name}}</h3>
+            <h4>{{item.sales_tip}}</h4>
+            <h5>￥{{item.price}}</h5>
             <!--<button>查看账号</button>-->
             <div class="confirm">
-              <span @click="isShow=!isShow">查看账户</span>
-              <span @click="popConfirm">确认收货</span></div>
+              <span @click="showPwd(item)">查看账户</span>
+              <span @click="popConfirm(item)">确认收货</span></div>
           </div>
-          <div class="c-details" v-show="!isShow">
-            <span class="account">账户:5151315</span>
-            <span class="password">密码:151513</span>
+         <!-- <div class="c-details" v-show="!isShow">
+            <span class="account">账户:{{item.account}}</span>
+            <span class="password">密码:{{item.password}}</span>
             <div class="confirm" @click="isShow=!isShow"><span>查看大区</span></div>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
@@ -38,7 +38,9 @@
 </template>
 
 <script>
-  import { MessageBox } from 'mint-ui';
+  import {mapState} from 'vuex'
+  import {MessageBox,Indicator} from 'mint-ui'
+
   export default {
     name: "receipt",
     data() {
@@ -47,13 +49,25 @@
         isShow: true
       }
     },
+    computed: {
+      ...mapState(['unreceived'])
+    },
     methods: {
-      popConfirm() {
-        MessageBox({
-          title: 'GMT安全提示',
-          message: '确认收货?',
-          showCancelButton: true
-        });
+      showPwd(item) {
+        MessageBox('GMT账户管理', `账号:${item.account},密码:${item.password}`);
+      },
+      // 收货提示
+      popConfirm(item) {
+        var data = item;
+        MessageBox.confirm('确认收货 ?').then(action => {
+          let json = {demo: 'ok'}
+          this.$store.dispatch('allOrderGet',{data});
+          Indicator.open('确认收货中...');
+          setTimeout(() => {
+            Indicator.close();
+            this.$store.dispatch('confirmReceived',{data})
+          },500)
+        })
       }
     }
   }
@@ -67,21 +81,26 @@
     color: #ad0000
     background linear-gradient(to right, #ffb879, gold, #806a7f)
     text-align: center
+
   .list
     margin 10px 0
     background #fff
+
     .item
       padding 10px
+
     .title
       display: flex
       justify-content space-between
       height: 30px
       line-height: 30px;
+
       .title-uni
         padding 2px 5px
         color: #fff;
         border-radius 5px;
         background: linear-gradient(#c7a600, #7ad29e);
+
       .title-uni-desc
         padding 2px 5px
         color: #333
@@ -93,24 +112,29 @@
       padding 5px
       box-shadow 0 0 5px #ccc
       border-radius 10px
+
       .c-img
         display: inline-block
         width 30%
-        height:30%
+        height: 30%
+
         img
           width 100%
           border-radius 10px
+
       .c-details
         display flex
         flex-flow wrap
         padding-left 3%
-        width:65%
-        height:100%
-        .account,.password
+        width: 65%
+        height: 100%
+
+        .account, .password
           display: block
           width 100%
           line-height: 30px;
           color #8a0000
+
         button
           border: none
 
@@ -119,12 +143,14 @@
           width 100%
           color #ab0000
           line-height: 35px;
+
         h4
           fonfont-size: 18px
           height 30px
           line-height: 30px;
           width 100%
           color #333
+
         h5
           fonfont-size: 18px
           height 30px
@@ -136,6 +162,7 @@
       position relative
       text-align: right
       margin: 20px 10px;
+
       span
         padding 5px 8px
         box-shadow 0 0 3px #ddd

@@ -8,19 +8,19 @@
     </mt-header>
     <p class="tip">MGT游戏中心,为你保驾护航</p>
     <div class="list">
-      <div class="item">
+      <div class="item" v-for="(item,index) in allOrder" :key="index">
         <div class="title">
           <span class="title-uni">MGT商城</span>
           <span class="title-uni-desc">已收货</span>
         </div>
         <div class="content">
           <div class="c-img">
-            <img src="./images/avatar.jpg" alt="">
+            <img src="./images/img.jpg" alt="">
           </div>
           <div class="c-details">
-            <h3>地下城与勇士</h3>
-            <h4>广州一区</h4>
-            <h5>￥88</h5>
+            <h3>{{item.goods_name}}</h3>
+            <h4>{{item.sales_tip}}</h4>
+            <h5>￥{{item.price}}</h5>
           </div>
         </div>
         <div class="confirm" @click="popConfirm"><span>{{text}}</span></div>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   import { MessageBox } from 'mint-ui';
   export default {
     name: "receipt",
@@ -39,6 +40,9 @@
         text: '评价',
         event: true
       }
+    },
+    computed: {
+      ...mapState(['allOrder'])
     },
     methods: {
       popConfirm() {

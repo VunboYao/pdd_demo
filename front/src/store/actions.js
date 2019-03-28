@@ -27,7 +27,11 @@ import {
   DEL_GOODS,
   ADD_CART,
   DEL_GOODS_GROUP,
-  PUBLISH_NEW_DATA
+  PUBLISH_NEW_DATA,
+  ADD_ACCOUNT_TO_CAR,
+  ADD_UNRECEIVED,
+  CONFIRM_RECEIVED,
+  ALL_ORDER
 } from './mutation-types'
 
 export default {
@@ -126,5 +130,27 @@ export default {
   // 16.发布新数据
   publishNewData({commit}, {list}) {
     commit(PUBLISH_NEW_DATA, {list})
+  },
+
+  // 17.添加游戏账号到购物车
+  addGameAccountCar({commit}, {list}) {
+    commit(ADD_ACCOUNT_TO_CAR, {list})
+  },
+
+  // 18.添加数据到未收货
+  add2unreceived({commit}, {goodsGroup}) {
+    commit(ADD_UNRECEIVED, {goodsGroup})
+  },
+
+  // 19.确认收货
+  confirmReceived({commit}, {data}) {
+    console.log(data);
+    commit(CONFIRM_RECEIVED, {data})
+  },
+
+  // 20.所有订单
+  allOrderGet({commit}, {data}) {
+    console.log(data);
+    commit(ALL_ORDER, {data})
   }
 }

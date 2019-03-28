@@ -16,7 +16,7 @@
           </p>
         </div>
         <!--中间的列表-->
-        <main class="jd_shopCart_list">
+        <!--<main class="jd_shopCart_list">
           <section>
             <div class="shopCart_list_con"
                  v-for="(goods,index) in carGoods" :key="index">
@@ -28,21 +28,55 @@
               </div>
               <div class="list_con_right">
                 <div class="shop_img">
-                  <img :src="goods.thumb_url" alt="">
+                  <img :src="goods.thumb_url" alt="图片数据丢失">
                 </div>
                 <div class="shop_con">
                   <a href="#">{{goods.goods_name}}&nbsp;&nbsp;&nbsp;{{goods.sales_tip}}</a>
                   <p class="shop_price">￥{{goods.price}}</p>
-                  <div class="shop_deal">
-                    <div class="shop_deal_left">
-                      <span @click="updateGoodsCount(goods,false)">-</span>
-                      <input disabled type="tel" value="1" v-model="goods.buy_count">
-                      <span @click.stop="updateGoodsCount(goods,true)">+</span>
-                    </div>
-                    <div class="shop_deal_right" @click.stop="clickTrash(goods)">
-                      <span></span>
-                      <span></span>
-                    </div>
+                  &lt;!&ndash;<div class="shop_deal">&ndash;&gt;
+                    &lt;!&ndash;<div class="shop_deal_left">&ndash;&gt;
+                      &lt;!&ndash;<span @click="updateGoodsCount(goods,false)">-</span>&ndash;&gt;
+                      &lt;!&ndash;<input disabled type="tel" value="1" v-model="goods.buy_count">&ndash;&gt;
+                      &lt;!&ndash;<span @click.stop="updateGoodsCount(goods,true)">+</span>&ndash;&gt;
+                    &lt;!&ndash;</div>&ndash;&gt;
+                    &lt;!&ndash;<div class="shop_deal_right" @click.stop="clickTrash(goods)">&ndash;&gt;
+                      &lt;!&ndash;<span></span>&ndash;&gt;
+                      &lt;!&ndash;<span></span>&ndash;&gt;
+                    &lt;!&ndash;</div>&ndash;&gt;
+                  &lt;!&ndash;</div>&ndash;&gt;
+                </div>
+              </div>
+            </div>
+            <div class="null_tip">-&#45;&#45;&#45;&#45;&#45;&#45; 我是有底线的 -&#45;&#45;&#45;&#45;&#45;&#45;</div>
+          </section>
+        </main>-->
+        <main class="jd_shopCart_list">
+          <section>
+            <div class="shopCart_list_con"
+                 v-for="(goods,index) in gameAccountCar" :key="index">
+              <div class="list_con_left">
+                <a href="javascript:;"
+                   class="cart_check_box"
+                   @click.stop="singleSelected(goods)"
+                   :checked="goods.checked"></a>
+              </div>
+              <div class="list_con_right">
+                <div class="shop_img">
+                  <img src="./images/img.jpg" alt="MGT游戏交易">
+                </div>
+                <div class="shop_con">
+                  <a href="#">{{goods.goods_name}}&nbsp;&nbsp;&nbsp;{{goods.sales_tip}}</a>
+                  <p class="shop_price">￥{{goods.price}}</p>
+                </div>
+                <div class="shop_deal" style="opacity: 0;">
+                  <div class="shop_deal_left">
+                    <!--<span @click="updateGoodsCount(goods,false)">-</span>-->
+                    <input disabled type="tel" value="1" v-model="goods.buy_count">
+                    <!--<span @click.stop="updateGoodsCount(goods,true)">+</span>-->
+                  </div>
+                  <div class="shop_deal_right" @click.stop="clickTrash(goods)">
+                    <span></span>
+                    <span></span>
                   </div>
                 </div>
               </div>
@@ -103,11 +137,11 @@
       SelectLogin
     },
     computed: {
-      ...mapState(['userInfo', 'carGoods'])
+      ...mapState(['userInfo', 'carGoods', 'gameAccountCar'])
     },
     created() {
       //请求数据
-      this.$store.dispatch('getCartGoods')
+      // this.$store.dispatch('getCartGoods')
     },
     methods: {
       // 1.计算商品的增加和减少
@@ -127,7 +161,8 @@
       // 3.goods totalMoney
       getAllGoodsPrice() {
         let totalPrice = 0
-        this.carGoods.forEach((goods, index) => {
+        // this.carGoods.forEach((goods, index) => {
+        this.gameAccountCar.forEach((goods, index) => {
           if (goods.checked) {
             totalPrice += goods.price * goods.buy_count
           }
@@ -145,7 +180,7 @@
       // 5.判断是否全选
       hasSelectedAll() {
         let flag = true
-        this.carGoods.forEach((goods, index) => {
+        this.gameAccountCar.forEach((goods, index) => {
           if (!goods.checked) {
             flag = false
           }
@@ -176,23 +211,24 @@
         // 隐藏支付信息
         this.$refs.pay_info.style.display = 'none'
         Indicator.open('正在支付...')
-        /* // 定义临时数组
+         // 定义临时数组
          let goodsGroup = []
          // 遍历选中的商品，删除
-         this.carGoods.forEach(goods => {
+         this.gameAccountCar.forEach(goods => {
            if (goods.checked) {
              // 获取选中的id
-             goodsGroup.push(goods.goods_id)
+             goodsGroup.push(goods)
            }
-         })*/
+         })
         // 数据库删除
-        let goodsGroup = await this.getGroup();
-        delCartGoodsGroup(goodsGroup)
+       /* let goodsGroup = await this.getGroup()
+        delCartGoodsGroup(goodsGroup)*/
         // vuex中删除
-        this.$store.dispatch('delGoodsGroup', {goodsGroup})
+        this.$store.dispatch('add2unreceived',{goodsGroup})
         // 延时关闭提示
         setTimeout(() => {
           Indicator.close()
+          this.$store.dispatch('delGoodsGroup', {goodsGroup})
           this.$refs.subPay.style.height = '0'
           this.totalMoney = 0
           this.isSelectAll = false
@@ -212,7 +248,7 @@
         // 定义临时数组
         let goodsGroup = []
         // 遍历选中的商品，删除
-        this.carGoods.forEach(goods => {
+        this.gameAccountCar.forEach(goods => {
           if (goods.checked) {
             // 获取选中的id
             goodsGroup.push(goods.goods_id)
@@ -313,6 +349,8 @@
 
             .shop_img
               float left
+              width 80px
+              height 80px
 
               img
                 width 80px

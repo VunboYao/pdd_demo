@@ -21,6 +21,7 @@
 </template>
 
 <script>
+    import {Indicator} from 'mint-ui';
     import {mapState} from 'vuex'
     export default {
         name: "newData",
@@ -28,8 +29,23 @@
           ...mapState(['newPublishData'])
       },
       methods: {
+          // 添加购物车
         addShoppingCar(goods) {
-          console.log(goods);
+          let list = {
+            goods_name: goods.gameName,
+            sales_tip: goods.areaName,
+            price: goods.price,
+            account: goods.account,
+            password: goods.password,
+            checked: false,
+            buy_count: 1
+          }
+          Indicator.open('添加购车中...');
+          this.$store.dispatch('addGameAccountCar', {list});
+          setTimeout(() => {
+            Indicator.close();
+            this.$router.push('/chat');
+          },2000)
         }
       }
     }

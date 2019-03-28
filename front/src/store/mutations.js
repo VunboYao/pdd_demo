@@ -15,7 +15,11 @@ import {
   DEL_GOODS,
   ADD_CART,
   DEL_GOODS_GROUP,
-  PUBLISH_NEW_DATA
+  PUBLISH_NEW_DATA,
+  ADD_ACCOUNT_TO_CAR,
+  ADD_UNRECEIVED,
+  CONFIRM_RECEIVED,
+  ALL_ORDER
 } from './mutation-types'
 
 export default {
@@ -75,7 +79,7 @@ export default {
 
   //是否选中全部商品
   [SELECT_ALL_GOODS](state, {isSelected}) {
-    state.carGoods.forEach((item, i) => {
+    state.gameAccountCar.forEach((item, i) => {
       if (item.checked) { // 选中
         item.checked = !isSelected
       } else { // 还属性未存在
@@ -103,15 +107,41 @@ export default {
   // 删除多个商品
   [DEL_GOODS_GROUP](state, {goodsGroup}) {
     goodsGroup.forEach(item => {
-      const index = state.carGoods.indexOf(item)
-      state.carGoods.splice(index, 1)
+      const index = state.gameAccountCar.indexOf(item)
+      console.log(index)
+      state.gameAccountCar.splice(index, 1)
     })
   },
 
   // 发布新商品
   [PUBLISH_NEW_DATA](state, {list}) {
-      state.newPublishData.push(list);
+    state.newPublishData.push(list)
+  },
+
+  // 添加游戏账号到购物车
+  [ADD_ACCOUNT_TO_CAR](state, {list}) {
+    state.gameAccountCar.push(list)
+  },
+
+  // 添加数据到未收货区
+  [ADD_UNRECEIVED](state, {goodsGroup}) {
+    goodsGroup.forEach(item => {
+      state.unreceived.push(item)
+    })
+  },
+
+  // 确认收货
+  [CONFIRM_RECEIVED](state, {data}) {
+    const index = state.unreceived.indexOf(data)
+    state.unreceived.splice(index, 1)
+  },
+
+  // 添加所有订单
+  [ALL_ORDER](state, {data}) {
+    state.allOrder.push(data)
   }
+
+
 
   // // 加入购物车
   // [ADD_CART](state, {goods}) {

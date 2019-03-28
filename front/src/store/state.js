@@ -14,5 +14,11 @@ export default {
   // 购物车数据
   carGoods: [],
   // 新发布数据
-  newPublishData: []
+  newPublishData: [],
+  // 游戏账号购物车
+  gameAccountCar: [],
+  // 未确认收获的数据
+  unreceived:[],
+  // 所有数据
+  allOrder: []
 }
